@@ -80,6 +80,20 @@ button{
 #submain h3 {
     padding: 0px 2vh;
 }
+#sort{
+    width:30vh;
+    display: flex;
+    justify-content: space-between;
+   
+    
+}
+#sort > div{
+    border:1px solid black;
+    padding:1vh 2vh;
+    font-family: arial;
+    font-weight: 600;
+    background-color: gainsboro;
+}
 
 </style>
 <body>
@@ -102,7 +116,10 @@ button{
     
     <button>></button>
  </div>
-
+<div id="sort">
+  <div id="sort1">sort-lh</div>
+  <div id="sort2" >sort-hl</div>
+</div>
 
 <div id="main">
 
@@ -211,7 +228,35 @@ setInterval(change,1000)
 <script>
     var moviesData=JSON.parse(localStorage.getItem("moviesData"));
   
-moviesData.forEach(function(ele){
+document.querySelector("#sort1").addEventListener("click",function(){
+var sort=document.querySelector("#sort1").value;
+moviesData.sort(function(a, b){
+
+        return a.rating - b.rating;
+   
+})
+displayData(moviesData)
+})
+
+document.querySelector("#sort2").addEventListener("click",function(){
+var sort=document.querySelector("#sort2").value;
+moviesData.sort(function(a, b){
+
+        return b.rating - a.rating;
+   
+})
+displayData(moviesData)
+})
+
+
+
+
+
+    function displayData(){
+
+        document.querySelector("#main").innerHTML="";
+
+        moviesData.forEach(function(ele){
     
    var submain= document.createElement("div");
    submain.setAttribute("id","submain")
@@ -231,4 +276,8 @@ moviesData.forEach(function(ele){
      submain.append(img, rating, name, date)
     document.querySelector("#main").append(submain)
 })
+    }
+
+
+displayData()
 </script>
