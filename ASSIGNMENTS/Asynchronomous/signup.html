@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #nav{
+        display: flex;
+        flex-direction: row-reverse;
+        border:1px solid blue;
+        font-family: arial;
+        font-weight: 500;
+        padding-right: 10vh;
+    }
+#nav > div{
+    padding:3vh;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#signup{
+    text-align: center;
+    width:50vh;
+    border: 2px solid black;
+    padding:4vh;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto ;
+    grid-gap: 3vh;
+    margin-top: 5vh;
+}
+input{
+    padding:2vh;
+}
+#submit{
+    width: 20vh;
+    margin: auto;
+}
+
+</style>
+<body>
+    <div id="nav">
+        <div><a href="home.html">Home</a></div>
+        <div><a href="signup.html">Signup</a></div>
+        <div><a href="login.html">Login</a></div>
+    </div>
+
+
+<form>
+    <div id="signup">
+        <h2>Signup Page</h2>
+        <input id="name" type="text" placeholder="Enter the name"/>
+        <input id="contact" type="tel"  placeholder="Enter contact No."/>
+        <input id="email" type="email" placeholder="Enter the E-mail"/>
+        <input id="passward" type="password" placeholder="Enter the Passward"/>
+        <input id="submit" type="submit" placeholder="Submit"/>
+    </div>
+    
+</form>
+
+    
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit",forms)
+var signupData;
+if(localStorage.getItem("signupData")===null){
+    signupData=[]
+}else {
+    signupData=JSON.parse(localStorage.getItem("signupData"))
+}
+
+    function forms(){
+        event.preventDefault()
+
+       if(document.querySelector("#name").value =="" || document.querySelector("#contact").value =="" || document.querySelector("#email").value =="" || document.querySelector("#passward").value ==""){
+           alert("Plese fill the Details")
+       }
+       else if(document.querySelector("#name").value !="" || document.querySelector("#contact").value !="" || document.querySelector("#email").value !="" || document.querySelector("#passward").value !="") {
+          
+           
+       var userobj={
+           name:document.querySelector("#name").value,
+           contact:document.querySelector("#contact").value,
+           email:document.querySelector("#email").value,
+           passward:document.querySelector("#passward").value,
+       };
+
+       signupData.push(userobj)
+       localStorage.setItem("signupData",JSON.stringify(signupData))
+       alert("SignUp Successfull")
+           window.location.href="login.html"
+       }
+
+
+       
+    }
+
+  
+</script>
