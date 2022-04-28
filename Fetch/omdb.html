@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    h1{
+        text-align: center;
+    }
+    form{
+        display: grid;
+        grid-row:auto;
+        grid-column: auto;
+        grid-gap: 4vh;
+    }
+    #search{
+        padding:2vh;
+        width: 70%;
+        margin: auto;
+       
+    }
+    #submit{
+        padding: 2vh;
+        width: 10%;
+        margin:auto;
+        margin-bottom: 3vh;
+       
+    }
+    #block{
+        width: 80%;
+        margin:auto;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: auto;
+        grid-gap: 5vh;
+        margin-top: 5vh;
+    }
+  img{
+      width: 100%
+  }
+  #box1{
+      width: fit-content;
+      height: 100%;
+
+  }
+  #box{
+      border: 1px solid gainsboro;
+  }
+</style>
+<body>
+    <div>
+        <h1>MoviesSearch.com</h1>
+        <form>
+            <input id="search" type="text" placeholder="search movies" />
+       <button id="submit" onclick="show()">search </button>
+        </form>
+        <hr>
+        <div id="block">
+
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+  
+
+
+function show(){
+    event.preventDefault()
+    var search=document.querySelector("#search")
+
+
+    fetch(`https://www.omdbapi.com/?apikey=d32dc942&s=${search.value}`).then(function(result){
+    result.json().then(function (result1){
+        var obj=result1.Search
+      obj.forEach(function(ele){
+          var box=document.createElement("div");
+          box.setAttribute("id","box");
+          var box1=document.createElement("div");
+          box.setAttribute("id","box1");
+
+          var img=document.createElement("img");
+          img.src=ele.Poster;
+
+          
+          var type =document.createElement("p");
+          type.innerText=ele.Type;
+
+        //   var year =document.createElement("h4");
+        //   year.innerText=ele.Year;
+
+          var title =document.createElement("h4");
+          title.innerText=ele.Title +" ("+ele.Year+") ";
+
+        
+
+        box1.append(img)
+        box.append(box1,title)
+          document.querySelector("#block").append(box)
+      })
+       
+    })
+}).catch(function(error){
+    console.log(error)
+})
+    
+}
+
+
+
+</script>
