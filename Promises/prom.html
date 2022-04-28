@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    p{
+        text-align: end;
+        font-family: arial;
+    }
+   #D{
+    width:50%;
+    padding: 1% 5%;
+   }
+#display{
+    width:100%;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: auto;
+    grid-gap: 5%;
+    
+    height: fit-content;
+}
+#display > div{
+    text-align: center;
+    border: 1px solid gainsboro;
+    font-family: arial;
+}
+
+    button{
+        font-weight: 600;
+        padding:2vh;
+        background-color: green;
+        color: white;
+        font-family: arial;
+        width: fit-content;
+        margin: 5vh 20vh;
+    }
+    #items{
+        width: 30%;
+        padding:5vh;
+        display: grid;
+        grid-template-columns: auto;
+        grid-gap: 2vh;
+    }
+    #main{
+        display: flex;
+        justify-content: space-evenly;
+        height: fit-content;
+    }
+    #main > div{
+        
+        border: 1px solid gainsboro;
+    }
+    #nav{
+       
+        display: flex;
+        justify-content: space-evenly;
+        color: rgba(0, 0, 0, 0.734);
+        border: 1px solid gainsboro;
+        margin-bottom: 5vh;
+       
+    }
+   #display img{
+        width:auto;
+    }
+</style>
+<body>
+    
+<div id="nav">
+    <img src="https://www.mcdonalds.com/content/dam/sites/usa/nfl/icons/arches-logo_108x108.jpg"/>
+    <h1>McDonald's</h1>
+</div>
+    
+    <div id="main">  
+          <div id="items">
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/burgers_300x300:category-panel-left-desktop" type="checkbox" value=" Burgers" placeholder="Big Mac" /> Burgers  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/breakfast_300x300:category-panel-left-desktop" type="checkbox" value=" Breakfast" placeholder="Big Mac"/> Breakfast  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/drinks_300x300:category-panel-left-desktop" type="checkbox" value=" Beverages" placeholder="Big Mac"/> Beverages  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/chicken_sandwiches_300x300:menu-category-desktop" type="checkbox" value=" Chicken & Sandwiches" placeholder="Big Mac"/> Chicken & Sandwiches  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/nav_combo_meal_160x160_:menu-category-desktop" type="checkbox" value=" Combo Meal" placeholder="Big Mac"/> Combo Meal  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/desserts_shakes_300x300:menu-category-desktop" type="checkbox" value=" Desserts & Shakes" placeholder="Big Mac"/> Desserts & Shakes  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/nav_happy_meal_160x160:menu-category-desktop" type="checkbox" value=" Happy Meal" placeholder="Big Mac"/> Happy Meal  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/mccafe_300x300:menu-category-desktop" type="checkbox" value=" McCafe` Drinks" placeholder="Big Mac"/> McCafe` Drinks  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/Menu_LeftRail_mcd-160x160:menu-category-desktop" type="checkbox" value=" McCafe` Bakery" placeholder="Big Mac"/> McCafe` Bakery  </lable>
+        <lable> <input src="https://s7d1.scene7.com/is/image/mcdonalds/snacks_sides_300x300:menu-category-desktop" type="checkbox" value=" Snacks & Sides" placeholder="Big Mac"/> Snacks & Sides  </lable>
+
+    
+    </div>
+
+<div id="D">
+    <p id="id"></p>
+    <div id="display">
+
+    </div>
+</div>
+    
+
+</div>
+
+<button onclick="order()">Order Food</button>
+
+</body>
+</html>
+
+
+<script>
+ function run(){
+
+    var donaldData=JSON.parse(localStorage.getItem("donaldData"));
+    if(donaldData.length!=0){
+        var id=document.querySelector("#id")
+    id.innerText="order id:mac 0248"
+    }   
+  
+
+    
+//  console.log(donaldData)
+
+donaldData.forEach((ele,i)=>{
+    var box =document.createElement("div");
+   
+    var img=document.createElement("img");
+    img.src=ele.src
+    var h2=document.createElement("h4");
+    h2.innerText=ele.name;
+    box.append(img,h2);
+    document.querySelector("#display").append(box)
+})
+
+ }
+
+</script>
+
+
+
+<script>
+
+    var arr=[]
+      function order(){
+        var input= document.querySelectorAll("input")
+    input.forEach(function(ele){
+        if(ele.checked){
+            obj={
+                name:ele.value,
+                src:ele.src,
+            }
+            arr.push(obj)
+        }
+    })
+    localStorage.setItem("donaldData",JSON.stringify(arr))
+    window.location.reload()
+
+      }
+
+
+    //   var input= document.querySelectorAll("input")
+    //   console.log(input[0].alt)
+
+    </script>
+
+
+
+<script>
+    var donaldData=JSON.parse(localStorage.getItem("donaldData"));
+console.log(donaldData)
+    var mcdonald= new Promise(function(resolve,reject){
+        setTimeout(  function (){
+            
+run()
+      },1000)
+    })
+
+
+
+     mcdonald.then(function(result){
+         console.log(result)
+     }).catch(function(error){
+         console.log(error)
+     })
+</script>
