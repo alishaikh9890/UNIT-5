@@ -53,6 +53,7 @@
       border: 1px solid gainsboro;
       padding: 2vh;
       height: fit-content;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   }
  
@@ -67,6 +68,12 @@ p{
 
 #title{
     margin: 1% 0%;
+}
+h5{
+    text-align: end;
+    margin:0;
+    color: orange;
+    
 }
     
   
@@ -153,6 +160,12 @@ var type =document.createElement("p");
 type.innerText=" " +ele.Type;
 
 bx.append(rating,type)
+
+var rec= document.createElement("h5");
+rec.textContent="RECOMMENDED";
+if(result3.imdbRating > 8.5){
+    box1.append(rec,img)
+}
 
 box1.append(img)
 box.append(box1,bx,title)
