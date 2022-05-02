@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<style>
+    a{
+        font-weight: 600;
+    }
+    #display{
+        padding:5%
+    }
+    #data{
+        border: 1px solid gainsboro;
+        width: fit-content;
+        height: fit-content;
+        padding: 2%;
+        margin: auto;
+        
+    }
+    p{
+        margin-left:20% ;
+    }
+    img{
+        width: 20%
+    }
+#head{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    h2{
+        text-align: center;
+    }
+#searchbar{
+    display: flex;
+   justify-content: space-evenly;
+   
+    margin: auto;
+    width: 60%;
+}
+#city{
+    padding:2vh;
+    width: 70%;
+}
+button{
+    padding: 2vh;
+    width:10%
+}
+</style>
+
+<body>
+    <h2>Weather App</h2>
+<div id="searchbar">
+    <input id="city" placeholder="city"/>
+    <button>search</button>
+</div>
+ 
+<div id="display">
+
+    
+
+</div>
+   
+    
+</body>
+</html>
+
+<script>
+
+    document.querySelector("button").addEventListener("click",function(){
+       var search= document.querySelector("#city")
+
+       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search.value}&appid=11c14169f3059be68569dc2b5932532c`).then(function(result){
+           result.json().then(function(result1){
+             
+               var sys =result1.sys
+               var wind =result1.wind
+               var wether= result1.main
+               var disc=result1.weather
+               
+           
+
+
+                document.querySelector("#display").innerHTML=`
+                <div id="data">
+                <div id="head">
+                    <h3> ${result1.name}, ${sys.country} </h3>
+                    <img id="clearsky" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYmUHtVNN0Nqtc1wmU6mvkV2TzpPdS5GkJTQ&usqp=CAU"/>
+                <img id="clouds" src="data:image/jpeg;base64,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"/>
+                    </div>
+                
+                <p><a>temp:</a> ${wether.temp} °C  </p>
+                <p><a>pressure:</a>  ${wether.pressure}mb </p>
+                <p><a>humidity:</a>  ${wether.humidity}% </p>
+                <p><a>wind speed:</a>  ${wind.speed} km/h</p>
+                <p><a>sunrise:</a>  ${sys.sunrise}</p>
+                <p><a>sunset:</a>  ${sys.sunset}</p>   
+                </div>       
+               
+                `
+                disc.forEach(element => {
+                if(element.description=="clear sky"){
+                    document.querySelector("#clearsky").style.display="block"
+                    document.querySelector("#clouds").style.display="none"
+                }else {
+                    document.querySelector("#clearsky").style.display="none"
+                    document.querySelector("#clouds").style.display="block"
+                }
+
+                console.log(element.description)
+               });
+               
+            
+
+           })
+       }).catch(function(error){
+           console.log("not found",error)
+       })
+
+    })
+
+</script>
