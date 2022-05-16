@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family:arial;
+    }
+    #nav{
+    
+        display: flex;
+        flex-direction: row-reverse;
+        border: 1px solid black;
+        padding: 2vh;
+        background-color: rgba(135, 207, 235, 0.508);
+    }
+    #nav > div{
+     
+        padding: 1vh;
+        margin-right: 4vh;
+       
+    }
+    #nav > div:hover{
+        background-color: skyblue;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    #card{
+        width: fit-content;
+        border: 1px solid black;
+        padding: 2vh;
+        margin: auto;
+        margin-top: 4vh;
+    }
+</style>
+<body>
+    <div id="nav">
+      
+       
+        <div><a href="Search Page.html" >Search</a></div>
+        <div><a href="Individual Brewery Page.html">Individual</a></div>
+        <div><a href="Home Page.html">Home</a></div>
+    </div>
+
+    <div id="card">
+
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    var id=localStorage.getItem("id")
+   
+
+    fetch(`https://api.openbrewerydb.org/breweries?by_id=${id}`).then((result2)=>{
+        result2.json().then((result3)=>{
+
+            result3.forEach(element => {
+                
+                document.querySelector("#card").innerHTML=`
+            
+            <h4>Name: ${element.name} </h4>
+            <h4>brewery_type: ${element.brewery_type} </h4>
+            <h4>city: ${element.city} </h4>
+            <h4>state: ${element.state} </h4>
+            <h4>postal_code: ${element.postal_code} </h4>
+            <h4>country: ${element.country} </h4>
+            <h4>phone: ${element.phone} </h4>
+            <h4>updated_at: ${element.updated_at} </h4>
+            <h4>created_at: ${element.created_at} </h4>
+            
+            `
+
+            });
+
+            
+
+        })
+    })
+</script>
