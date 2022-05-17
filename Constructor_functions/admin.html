@@ -23,6 +23,11 @@
     border-radius: 1vh;
     
 }
+#sold,#gender{
+    border: 1px solid rgb(158, 157, 157);
+    padding: 2vh ;
+    border-radius: 1vh;
+}
 #form > div{
     display: flex;
     flex-direction: column;
@@ -45,7 +50,10 @@
             <option>Female</option>
 
             </select></div>
-            <div><lable>sold</lable>    <input id="sold"/></div>
+            <div><lable>sold</lable>    <select type="" id="sold">
+                <option>false</option>
+                <option>true</option>
+            </select></div>
             <div>    <input type="submit" id="add" onclick="submit()" /></div>
  
     </div>
@@ -54,18 +62,35 @@
 
 <script>
     var arr =[]
-function submit(){
-    var obj={
-        name:document.querySelector("#name").value,
-        category: document.querySelector("#category").value,
-        image: document.querySelector("#image").value,
-        price: document.querySelector("#price").value,
-        gender: document.querySelector("#gender").value,
-        sold:document.querySelector("#sold").value
-}
-arr.push(obj)
-var  Product = localStorage.setItem("Product",JSON.stringify(arr))
+    
+function ar(name,category,image,price,gender,sold){
+    this.name=name
+   this.category=category
+   this.image=image
+   this.price=price
+   this.gender=gender
+   this.sold=sold
+
+// arr.push(obj)
+// var  Product = localStorage.setItem("Product",JSON.stringify(arr))
 }
 
+
+
+       var name=document.querySelector("#name").value;
+        var category= document.querySelector("#category").value; 
+               var image= document.querySelector("#image").value;   
+                     var price= document.querySelector("#price").value;    
+                       var gender= document.querySelector("#gender").value;
+       var sold=document.querySelector("#sold").value
+
+     var  obj= new ar(name,category,image,price,gender,sold)
+      
+
+      function submit(){
+          arr.push(obj)
+          var  Product = localStorage.setItem("Product",JSON.stringify(arr))
+      }
+     
    
 </script>
