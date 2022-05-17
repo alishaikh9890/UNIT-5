@@ -73,8 +73,8 @@
 
     <div>
         <div id="main">
-            <select>
-                <option></option>
+            <select id="select">
+                <option>Filter List</option>
                 <option>micro</option>
                 <option>planning</option>
                 <option>brewpub</option>
@@ -115,11 +115,36 @@ document.querySelector("table").innerHTML=`
     `
 
 
+document.querySelector("#select").addEventListener("change",function(){
+    var select=document.querySelector("#select").value;
+    if(select!="Filter List") {
+        
+            var data= result1.filter(function(ele){
+                return ele.brewery_type==select
+            })
+           
+            displayData(data)
+        
+    }else {
+        window.location.reload()
+    }
+  
+
+
+
+
+
+
+})
+
+function displayData(result1){
+    document.querySelector("tbody").innerHTML=""
+
 
 result1.forEach(element => {
     
+    
 
-var arr =[]
 
     
     var tr= document.createElement("tr")
@@ -154,13 +179,16 @@ document.querySelector("tbody").append(tr)
 
 });
 
-
+}
+displayData(result1)
 
         })
     })
 
 
 
+
+  
 
 
 </script>

@@ -60,11 +60,12 @@
     var id=localStorage.getItem("id")
    
 
-    fetch(`https://api.openbrewerydb.org/breweries?by_id=${id}`).then((result2)=>{
+    fetch(`https://api.openbrewerydb.org/breweries/${id}`).then((result2)=>{
         result2.json().then((result3)=>{
 
-            result3.forEach(element => {
-                
+           var element = result3
+           
+              
                 document.querySelector("#card").innerHTML=`
             
             <h4>Name: ${element.name} </h4>
@@ -78,11 +79,12 @@
             <h4>created_at: ${element.created_at} </h4>
             
             `
-
-            });
+         
 
             
 
         })
     })
+
+    // localStorage.removeItem("id")
 </script>
