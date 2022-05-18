@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+#main{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5%;
+    padding: 2%;
+}
+#main > div{
+display:grid;
+grid-template-columns: repeat(2,1fr);
+grid-gap: 3%;
+border: 1px solid gainsboro;
+padding: 3%;
+}
+#box1{
+    border: 1px solid gainsboro;
+    height: fit-content;
+}
+button{
+    margin-right: 6vh;
+    margin-bottom:  2vh;
+    width: 10vh;
+}
+
+h4{
+    text-align: end;
+    border: 1px solid gray;
+    display: inline;
+}
+h2{
+    text-align: center;
+    margin: 0 0;
+    padding: 1vh;
+    background-color: wheat;
+    
+}
+</style>
+<body>
+<h2><a href="./admin.html" >Amazon</a></h2>
+<h4 id="counter"></h4>
+
+
+
+    <div id="main">
+    
+    </div>
+</body>
+</html>
+
+<script>
+
+    var Product = JSON.parse(localStorage.getItem("Product"))
+  
+
+
+   document.querySelector("#counter").textContent="Total no Products are"+" "+Product.length
+   Product.forEach(function(element,Index) {
+
+    var box = document.createElement("div")
+ 
+    var box1 = document.createElement("div")
+    box1.setAttribute("id","box1")
+
+    var box2 = document.createElement("div")
+    box2.setAttribute("id","box2")
+
+    var img = document.createElement("img")
+    img.src=element.image
+
+    var p1 = document.createElement("p")
+    p1.textContent="Product name:"+" "+element.name
+    var p2 = document.createElement("p")
+    p2.textContent="Category:"+" "+element.category
+   
+    var p3 = document.createElement("p")
+    p3.textContent="Price:"+" "+element.price
+    var p4 = document.createElement("p")
+    p4.textContent="Gender:"+" "+element.gender
+    var sold = document.createElement("button")
+    sold.setAttribute("id","sold")
+    sold.textContent="Sold";
+    sold.addEventListener("click",function(){
+        if(sold.textContent=="Sold"){
+            sold.textContent="Unsold"
+        }
+       else if(sold.textContent=="Unsold"){
+            sold.textContent="Sold"
+         }
+    })
+    if(element.sold=="true"){
+        sold.style.backgroundColor="red"
+    }else if(element.sold=="false"){
+        sold.style.backgroundColor="green"
+    }
+
+    var rem = document.createElement("button")
+    rem.textContent="Remove";
+    rem.addEventListener("click",function(){
+        Product.splice(Index,1);
+        localStorage.setItem("Product",JSON.stringify(Product))
+        window.location.reload()
+    })
+
+    box1.append(img)
+    box2.append(p1,p2,p3,p4,rem,sold)
+    box.append(box1,box2)
+
+   document.querySelector("#main").append(box)
+
+   
+   });
+  
+</script>
+<script>
+    var sold = document.querySelector("#sold")
+   
+   
+    
+</script>

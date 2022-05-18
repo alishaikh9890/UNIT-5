@@ -16,6 +16,7 @@
     margin: auto;
     border: 2px solid black;
     padding: 4vh;
+    font-family:arial;
 }
 #form > div >input{
     border: 1px solid rgb(158, 157, 157);
@@ -37,9 +38,14 @@
     margin: auto;
     
 }
+h2{
+    text-align: center;
+    margin:0 0;
+}
 </style>
 <body>
     <div id="form">
+        <h2>Admin Panel</h2>
         <div><lable>Product Name</lable>
             <input id="name"/></div>
             <div><lable>category</lable>  <input id="category"/></div>
@@ -61,7 +67,7 @@
 </html>
 
 <script>
-    var arr =[]
+    
     
 function ar(name,category,image,price,gender,sold){
     this.name=name
@@ -74,23 +80,37 @@ function ar(name,category,image,price,gender,sold){
 // arr.push(obj)
 // var  Product = localStorage.setItem("Product",JSON.stringify(arr))
 }
-
-
-
-       var name=document.querySelector("#name").value;
-        var category= document.querySelector("#category").value; 
-               var image= document.querySelector("#image").value;   
-                     var price= document.querySelector("#price").value;    
-                       var gender= document.querySelector("#gender").value;
-       var sold=document.querySelector("#sold").value
-
-     var  obj= new ar(name,category,image,price,gender,sold)
-      
+var arr;
+if(JSON.parse(localStorage.getItem("Product")==null)){
+   var  arr =[]
+}else {
+    arr = JSON.parse(localStorage.getItem("Product"))
+}
 
       function submit(){
-          arr.push(obj)
-          var  Product = localStorage.setItem("Product",JSON.stringify(arr))
+          event.preventDefault()
+       var name=document.querySelector("#name").value;
+       
+       var category= document.querySelector("#category").value; 
+              var image= document.querySelector("#image").value;   
+                    var price= document.querySelector("#price").value;    
+                      var gender= document.querySelector("#gender").value;
+      var sold=document.querySelector("#sold").value
+
+    var  obj= new ar(name,category,image,price,gender,sold)
+    arr.push(obj)
+    var  Product = localStorage.setItem("Product",JSON.stringify(arr))
+
+    window.location.href="./products.html"
+   
       }
      
+          
    
+</script>
+
+
+<script>
+
+    
 </script>
