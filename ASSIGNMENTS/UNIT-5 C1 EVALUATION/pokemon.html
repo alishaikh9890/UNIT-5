@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+</head>
+
+<style>
+   table,thead,tbody,tr,td,th{border: 1px solid black;}
+   td{
+       padding: 1vh 10vh;
+   }
+   table{
+    margin: auto;
+   }
+
+   #home{
+       padding: 1%;
+       display: flex;
+       justify-content: space-between;
+   }
+   #pokenames{
+       width: fit-content;
+   }
+   #pokecards{
+       width:70%;
+       border: 1px solid gainsboro;
+       padding: 5vh;
+   }
+   #search{
+       width:70%;
+       padding: 2vh;
+   }
+   button{
+       padding: 2vh;
+   }
+   #form{
+       width: 70%;
+       margin: auto;
+   }
+   #ca{
+      width: fit-content;
+       border: 1px solid gainsboro;
+       padding: 0% 4%;
+       line-height: 100%;
+       margin: auto;
+       margin-top: 4%;
+   }
+   #ca  h4{
+       margin:6px 0px;
+   }
+   #ca > h4 > h4{
+    margin-left: 10%;
+   }
+  
+ 
+</style>
+<body>
+    <div id="home">
+        <div id="pokenames"></div>
+
+        <div id="pokecards">
+            <div id="form">
+                <input id="search" type="text" placeholder="search pokemone" />
+                <button>Search</button>
+            </div>
+
+            <div id="cards"></div>
+            
+        </div>
+    </div>
+   
+</body>
+</html>
+
+<script>
+
+    fetch('https://pokeapi.co/api/v2/pokemon').then(function(result){
+        result.json().then(function(result1){
+
+var poke =result1.results;
+localStorage.setItem("poke",JSON.stringify(poke))
+
+var poke=JSON.parse(localStorage.getItem("poke")) 
+var table=document.createElement("table");
+    var thead=document.createElement("thead")
+    var th=document.createElement("th")
+    th.textContent="NAMES"
+    var tbody=document.createElement("tbody");
+
+
+
+poke.forEach(element => {
+   
+    var tr = document.createElement("tr");
+    var td=document.createElement("td")
+     td.textContent=element.name
+
+     thead.append(th)
+    tr.append(td)
+    tbody.append(tr)
+    table.append(thead,tbody)
+     document.querySelector("#pokenames").append(table)
+    
+});
+
+        })
+    }).catch(function(error){
+        console.log("pokemone not found",error)
+    })
+</script>
+
+
+
+<script>
+
+document.querySelector("button").addEventListener("click",function(){
+event.preventDefault()
+    var search=document.querySelector("#search").value
+
+
+
+    fetch(`https://pokeapi.co/api/v2/pokemon/${search}`).then((result2) =>{
+        result2.json().then((result3) =>{
+        //     console.log(result3);
+
+          var  pokemon=result3
+
+                document.querySelector("#cards").innerHTML=`
+                <div id="ca">
+                <h4>id : ${pokemon.id}</h4>
+                <h4>name : ${pokemon.name}</h4>
+                <h4>height : ${pokemon.height}</h4>
+                <h4>weight : ${pokemon.weight}</h4>
+            
+                    
+                        <h4 id="abilities">abilities : </h4>
+                       <h4> <h4 id="moves">moves : </h4> </h4>
+                    </div>
+
+                `
+
+                var abi=[];
+                pokemon.abilities.forEach(function(ele,){
+         
+            abi.push(ele.ability.name)
+    
+        })
+
+        document.querySelector("#abilities").append(abi)
+
+        var mo=[]
+
+        pokemon.moves.forEach(function(ele,){
+        mo.push(ele.move.name)
+        })
+
+        document.querySelector("#moves").append(mo)
+                console.log(mo)
+             
+
+
+
+        })
+    }).catch((error)=>{
+        console.log("pokemon not found",error)
+    })
+
+
+})
+
+
+</script>

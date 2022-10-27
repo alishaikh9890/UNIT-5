@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>CRUD Using JSON Server</title>
+   <style>
+      table{
+         border: 1px solid gainsboro;
+  
+      }
+
+      th,td{
+         border: 1px solid gainsboro;
+       
+      }
+
+      input{
+         padding: 2vh;
+      }
+    
+      
+
+   </style>
+</head>
+
+<body>
+<div id="form">
+   <input type="text" id="name" placeholder="Name" />
+    <br/>
+   <input type="number" id="age" placeholder="Enter age" />
+   <br/>
+   <input type="text" id="gender" placeholder="gender" />
+   <br/>
+   <input type="text" id="cohort" placeholder="cohort" />
+   <br/>
+   <button onclick= "createStudent()" >CREATE THE STUDENT</button>
+</div>
+
+
+   <div id="container">
+
+   </div>
+</body>
+</html>
+
+<script>
+   let container= document.getElementById("container")
+
+async function createStudent(){
+   try {
+   let name = document.getElementById("name").value;
+   let age = +document.getElementById("age").value;
+   let gender = document.getElementById("gender").value;
+   let cohort = document.getElementById("cohort").value;
+
+   let body = {
+      name, 
+      age,
+      gender,
+      cohort
+   };
+
+   let res = await fetch(`http://localhost:3000/students`,{
+      method:"POST",
+      body:JSON.stringify(body),
+      headers:{
+         "Content-Type":"application/json"
+      }
+   });
+
+   let data = await res.json()
+
+    updateDOM()
+
+
+   } catch (error) {
+      console.log(error)
+   }
+  
+
+}
+
+
+
+ async function updateDOM(){
+try {
+   let table= document.createElement("table")
+      let thead= document.createElement("thead")
+      let theadrow= document.createElement("tr")
+   
+      let th1= document.createElement("th")
+      th1.textContent="id"
+      let th2= document.createElement("th")
+      th2.textContent = "name"
+      let th3= document.createElement("th")
+       th3.textContent="age"
+      let th4= document.createElement("th")
+      th4.textContent="gender"
+      let th5= document.createElement("th")
+      th5.textContent="cohart"
+      let th6 =document.createElement("th")
+      th6.textContent="DELETE"
+
+
+      theadrow.append(th1, th2, th3, th4, th5,th6);
+      thead.append(theadrow)
+      let tbody = document.createElement("tbody")
+     
+
+      let res = await fetch(`http://localhost:3000/students`);
+      let data = await res.json()
+  
+ 
+   data.forEach((student) => {
+     container.innerHTML=""
+      let raw = document.createElement("tr")
+      let td1 = document.createElement("td")
+      td1.textContent=student.id;
+      let td2 = document.createElement("td")
+      td2.textContent = student.name;
+      let td3 = document.createElement("td")
+      td3.textContent= student.age;
+      let td4 = document.createElement("td")
+      td4.textContent= student.gender;
+      let td5 = document.createElement("td")
+      td5.textContent = student.cohort;
+      let td6 = document.createElement("td")
+      let button = document.createElement("button")
+      button.textContent="Delete"
+
+      button.onclick = async function(){
+         let res = await fetch(`http://localhost:3000/students/${student.id}`, {
+            method:"DELETE"
+         })
+         updateDOM()
+      }
+      td6.append(button)
+
+
+      let td7 = document.createElement("td")
+      let edit = document.createElement("button")
+      edit.textContent="Edit"
+
+      edit.onclick =  function(){
+        console.log(student.id);
+        // save this id to local storage
+        localStorage.setItem("studentId",student.id)
+        // move user to the another page which is basically edit page;
+        location.href="edit.html"
+
+      }
+
+      td7.append(edit)
+      raw.append(td1, td2, td3, td4, td5, td6, td7)
+      tbody.append(raw)
+      
+   });   
+
+   table.append(thead, tbody)
+
+   container.append(table)
+  
+} catch (error) {
+   console.log(error)
+}
+     
+   }
+  
+   updateDOM()
+   
+</script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 Classes</title>
+</head>
+<body> </body>
+</html>
+<script>
+    console.log("ES 6 CLASS");
+
+    class Person2 {
+        constructor(n,a) {
+            this.name =n;
+            this.age =a;
+        }
+        // adding method to object direclty;
+        printName = function() {
+            console.log(this.name);
+        };
+
+        // adding method to object's prototype;
+        getDetails() {
+            console.log(`${this.name} is ${this.age} years old`);
+        }
+    }
+
+    let p2 = new Person2("clark", 1500);
+
+    console.log("p2",p2)
+</script>

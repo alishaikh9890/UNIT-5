@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./components/style.css">
+   <title>Posts</title>
+</head>
+<body>
+   <div id="add">
+      <label for="">Avatar</label>
+      <input type="text" name="Name" id="avatar" placeholder="Enter Avatar">
+      <br/>
+      <label for="">Name</label>
+      <input type="text" name="Name" id="name" placeholder="Enter Name">
+      <br/>
+      <label for="">Email</label>
+      <input type="text" name="Name" id="email" placeholder="Enter Email">
+      <br/>
+      <label for="">Gender</label>
+      <select name="" id="gender">
+         <option value="">select</option>
+         <option>Male</option>
+         <option>Female</option>
+         <option>other</option>
+      </select>
+
+      <br/>
+      <button onclick="addData()">Add Data</button>
+      
+      <label >Filter</label>
+      <select name="" id="filter">
+         <option>Filter</option>
+         <option>Male</option>
+         <option>Female</option>
+      </select>
+   </div>
+
+   <div id="edit">
+      <div>
+         <label for="">Avatar</label>
+         <input type="text" name="Name" id="Eavatar" placeholder="Enter Avatar">
+      </div>
+      <br />
+      <div>
+         <label for="">Name</label>
+         <input type="text" name="Name" id="Ename" placeholder="Enter Name">
+      </div>
+      <br />
+      <div>
+         <label for="">Email</label>
+         <input type="text" name="Name" id="Eemail" placeholder="Enter Email">
+      </div>
+      <br />
+      <div>
+         <label for="">Gender</label>
+         <select name="" id="Egender">
+            <option value="">select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>other</option>
+         </select>
+      </div>
+      <br />
+      <div>
+         <button onclick="editData()" >Edit Data</button>
+      </div>
+   </div>
+
+   <div id="container"></div>
+</body>
+</html>
+<script>
+
+   let container = document.getElementById("container");
+
+// let main =document.getElementById("add")
+
+
+ 
+async function addData(){
+  try {
+     let avatar = document.getElementById("avatar").value;
+     let first_name = document.getElementById("name").value;
+     let email = document.getElementById("email").value;
+     let gender = document.getElementById("gender").value;
+
+   //   console.log(avatar, name, email, gender)
+
+     let body ={
+        avatar,
+        first_name, 
+        email,
+        gender
+     }
+
+     let res = await fetch(`http://localhost:3000/posts`, {
+        method:"POST",
+        body:JSON.stringify(body),
+        headers:{
+           "Content-Type":"application/json"
+        }
+     });
+
+     let data = await res.json()
+
+     displayData()
+
+  } catch (error) {
+     console.log(error)
+  }
+}
+
+
+
+async function displayData(arr){
+               
+   document.querySelector("#container").innerHTML=""
+
+         arr.forEach(element => {   
+         let main = document.createElement("div");
+         let img= document.createElement("img")
+         img.src =element.avatar;
+         let h2 = document.createElement("h2")
+         h2.textContent="Name : "+element.first_name
+         let a = document.createElement("a")
+         a.textContent="Email : "+ element.email
+         let p = document.createElement("p")
+         p.textContent= "Gender : "+element.gender
+         // let buts = createElement("div");
+
+         let edit = document.createElement("button");
+         edit.textContent= "Edit";
+
+         edit.onclick=function(){
+
+            localStorage.setItem("postId",element.id)
+          
+               document.querySelector("#edit").style.display="block";
+
+
+
+                 const updateInputBoxes = async () => {
+
+                  try {
+                     let res = await fetch(`http://localhost:3000/posts/${element.id}`)
+                  let data = await res.json();
+
+               const   {avatar, first_name, email, gender} = data;
+                  document.getElementById("Eavatar").value= avatar;
+                  document.getElementById("Ename").value= first_name;
+                  document.getElementById("Eemail").value= email;
+                  document.getElementById("Egender").value= gender;
+               
+                  
+                  } catch (error) {
+                     console.log(error)
+                  }
+                
+            }
+             updateInputBoxes()
+         }
+        
+         
+
+         let remove = document.createElement("button");
+         remove.textContent = "Remove";
+      
+         remove.onclick = async function() {
+         let res = await fetch(`http://localhost:3000/posts/${element.id}`, {
+         method:"DELETE"
+         })
+         details()
+         }
+
+         // buts.append(edit, remove)
+         main.append(img, h2, a, p, edit, remove)
+         container.append(main)
+         });
+
+                              }
+
+                              
+                   async function editData(){
+               try {
+
+         
+                   const body ={
+                     avatar:document.getElementById("Eavatar").value,
+                     first_name:document.getElementById("Ename").value,
+                     email:document.getElementById("Eemail").value,
+                     gender:document.getElementById("Egender").value
+                   }
+                   const postId = localStorage.getItem("postId") 
+    ? localStorage.getItem("postId") 
+    : "";
+
+
+                   let res = await fetch(`http://localhost:3000/posts/${postId}`,{
+                     method:"PUT",
+                     body:JSON.stringify(body),
+                     headers:{
+                        "Content-Type":"application/json"
+                     }
+                   });
+
+                  
+               } catch (error) {
+                  console.log(error)
+               }
+               document.getElementById("edit").style.display="none"
+            }
+            
+
+
+
+
+
+const  details = async () =>{
+  try {    
+  
+   let gend = document.getElementById("filter")
+  let res = await fetch(`http://localhost:3000/posts`);
+  let data = await res.json()
+  console.log(data)
+ 
+
+document.querySelector("#filter").addEventListener("change",function(){
+    var select=document.querySelector("#filter").value;
+    if(select!="Filter") {   
+            var arr= data.filter(function(ele){
+                return ele.gender==select
+            })
+
+            displayData(arr)
+}
+else {
+   window.location.reload()
+}
+})
+displayData(data)
+ } catch (error) {
+     console.log(error)
+  }
+}
+
+details();
+
+
+
+
+</script> 
+ 

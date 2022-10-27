@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #nav{
+font-family: arial;
+font-weight: 600;
+    margin: 0%;
+    padding:0%;
+    position: sticky;
+    top:0px;
+    
+    background-color:rgba(246, 232, 206, 0.48);
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    }
+    #nav > div{
+        padding: 2vh;
+  
+    }
+    ul{
+        line-height: 5vh;
+    }
+    #video1, #video2, #video3, #video4{
+      display: none;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        padding: 5%;
+    }
+
+</style>
+<body>
+    <div id="nav">
+        <div id="scope"><a>Scope</a></div>
+        <div id="hoisting"><a>Hoisting</a></div>
+        <div id="constructorFunctions"><a>Constructor Functions</a></div>
+        <div id="prototype"><a>Prototype</a></div>
+    </div>
+
+    <div id="home">
+     
+    </div>
+    
+    <div id="video1">
+        <iframe src="https://drive.google.com/file/d/1Kya8t3M3Y2n0rdeXG1_yMoHyZVWsO5Yq/preview" width="640" height="480" allow="autoplay" ></iframe>
+    </div>
+
+    <div id="video2">
+        <iframe src="https://drive.google.com/file/d/1jqFfhTXwa-ejMdV26HaXy0rlJGYvMFsw/preview" width="640" height="480" allow="autoplay"></iframe>
+    </div>
+    <div id="video3">
+        <iframe src="https://drive.google.com/file/d/1bWdYLBuksQdst7lFbo-8GLrQZPGAq7t_/preview" width="640" height="480" allow="autoplay"></iframe>
+    </div>
+  
+    <div id="video4">
+        <iframe src="https://drive.google.com/file/d/1MQ8Z40lG_qc2utx6FaAt32isIZIPPaCr/preview" width="640" height="480" allow="autoplay"></iframe>
+    </div>
+
+ 
+
+  
+
+  
+
+
+
+
+
+
+</body>
+</html>
+
+<script>
+    var scope={
+        a:"The scope manages the availability of variables or we can also say that it determines the accessibility of variables.",
+        b:"Types of Scopes in JavaScript:1) Block scope  2) Function scope 3) Local scope 4) Global scope",
+        c:"Block scope: Earlier JavaScript had only Global Scope and Function Scope. let and const are the two new important keywords that were introduced by the ES6 and these two keywords provide Block Scope in JavaScript. ECMAScript (ES6) 2015 was the second major revision to JavaScript. Variables that are declared inside a { } block cannot be accessed from outside the block.",
+        d:"Function scope: JavaScript has a function scope and each function creates a new scope. Variables defined inside a function are not accessible from outside the function and variables declared with var, let and const are quite similar when declared inside a function.",
+        e:"Local scope: Variables declared inside a function become local to the function. Local variables are created when a function starts and deleted when the function is executed. Local variables have Function Scope which means that they can only be accessed from within the function.",
+        f:"Global scope: Variables declared Globally (outside of any function) have Global Scope and Global variables can be accessed from anywhere in a program. Similar to function scope variables declared with var, let and const are quite similar when declared outside a block."
+    }
+    localStorage.setItem("scope",JSON.stringify(scope))
+
+    var hoisting={
+        a:"In JavaScript, Hoisting is the default behavior of moving all the declarations at the top of the scope before code execution.",
+        b:"Basically, it gives us an advantage that no matter where functions and variables are declared, they are moved to the top of their scope regardless of whether their scope is global or local.",
+        c:"It allows us to call functions before even writing them in our code.",
+        d:"Note: JavaScript only hoists declarations, not the initializations.",
+        e:"JavaScript allocates memory for all variables and functions defined in the program before execution.",
+    }
+    localStorage.setItem("hoisting",JSON.stringify(hoisting))
+
+    var constructorFunctions={
+        a:"In JavaScript, a constructor function is used to create objects.",
+        b:"To create an object from a constructor function, we use the 'new' keyword.",
+        c:"In JavaScript, you can create multiple objects from a constructor function. ",
+        d:"In JavaScript, when 'this' keyword is used in a constructor function, 'this' refers to the object when the object is created.",
+        e:"You can also create a constructor function with parameters."
+    }
+    localStorage.setItem("constructorFunctions",JSON.stringify(constructorFunctions))
+
+    var prototype={
+        a:"JavaScript is a prototype based language, so, whenever we create a function using JavaScript, JavaScript engine adds a prototype property inside a function",
+        b:"Prototype property is basically an object (also known as Prototype object), where we can attach methods and properties in a prototype object.",
+        c:" Prototype property enables other objects to inherit all the properties and methods of function constructor.",
+        d:"There are different ways to create an object, one of the way is to create an object using function constructor.",
+        e:" When a certain method(or property) is called, it first checks inside the object but when it does'nt find, then search moves on Object's prototype."
+    }
+    localStorage.setItem("prototype",JSON.stringify(prototype))
+
+</script>
+
+
+
+
+<script>
+    
+document.querySelector("#scope").addEventListener("click",function(){
+
+    document.querySelector("#home").innerHTML=""
+
+    var scope=JSON.parse(localStorage.getItem("scope"));
+
+var ul =document.createElement("ul");
+
+var l1 = document.createElement("li")
+l1.textContent=scope.a
+var l2 = document.createElement("li")
+l2.textContent=scope.b
+var l3 = document.createElement("li")
+l3.textContent=scope.c
+var l4 = document.createElement("li")
+l4.textContent=scope.d
+var l5 = document.createElement("li")
+l5.textContent=scope.e
+var l6 = document.createElement("li")
+l6.textContent=scope.f
+
+ul.append(l1,l2,l3,l4,l5,l6)
+document.querySelector("#home").append(ul)
+
+document.querySelector("#video1").style.display="block"
+document.querySelector("#video2").style.display="none"
+document.querySelector("#video3").style.display="none"
+    document.querySelector("#video4").style.display="none"
+
+
+})
+
+
+</script>
+
+
+<script>
+    
+    document.querySelector("#hoisting").addEventListener("click",function(){
+    
+        document.querySelector("#home").innerHTML=""
+
+        var hoisting=JSON.parse(localStorage.getItem("hoisting"));
+    
+    var ul =document.createElement("ul");
+    
+    var l1 = document.createElement("li")
+    l1.textContent=hoisting.a
+    var l2 = document.createElement("li")
+    l2.textContent=hoisting.b
+    var l3 = document.createElement("li")
+    l3.textContent=hoisting.c
+    var l4 = document.createElement("li")
+    l4.textContent=hoisting.d
+    var l5 = document.createElement("li")
+    l5.textContent=hoisting.e
+   
+    ul.append(l1,l2,l3,l4,l5)
+    document.querySelector("#home").append(ul)
+    
+    
+    document.querySelector("#video1").style.display="none"
+    document.querySelector("#video2").style.display="block"
+document.querySelector("#video3").style.display="none"
+    document.querySelector("#video4").style.display="none"
+    })
+    
+    
+    </script>
+
+
+<script>
+    
+    document.querySelector("#constructorFunctions").addEventListener("click",function(){
+    
+        document.querySelector("#home").innerHTML=""
+
+        var constructorFunctions=JSON.parse(localStorage.getItem("constructorFunctions"));
+    
+    var ul =document.createElement("ul");
+    
+    var l1 = document.createElement("li")
+    l1.textContent=constructorFunctions.a
+    var l2 = document.createElement("li")
+    l2.textContent=constructorFunctions.b
+    var l3 = document.createElement("li")
+    l3.textContent=constructorFunctions.c
+    var l4 = document.createElement("li")
+    l4.textContent=constructorFunctions.d
+    var l5 = document.createElement("li")
+    l5.textContent=constructorFunctions.e
+   
+    ul.append(l1,l2,l3,l4,l5)
+    document.querySelector("#home").append(ul)
+
+    document.querySelector("#video2").style.display="none"
+document.querySelector("#video3").style.display="none"
+    document.querySelector("#video4").style.display="none"
+    document.querySelector("#video3").style.display="block"
+    })
+    
+    
+    </script>
+
+
+<script>
+    
+    document.querySelector("#prototype").addEventListener("click",function(){
+    
+        document.querySelector("#home").innerHTML=""
+
+        var prototype=JSON.parse(localStorage.getItem("prototype"));
+    
+    var ul =document.createElement("ul");
+    
+    var l1 = document.createElement("li")
+    l1.textContent=prototype.a
+    var l2 = document.createElement("li")
+    l2.textContent=prototype.b
+    var l3 = document.createElement("li")
+    l3.textContent=prototype.c
+    var l4 = document.createElement("li")
+    l4.textContent=prototype.d
+    var l5 = document.createElement("li")
+    l5.textContent=prototype.e
+   
+    ul.append(l1,l2,l3,l4,l5)
+    document.querySelector("#home").append(ul)
+    
+    document.querySelector("#video2").style.display="none"
+document.querySelector("#video3").style.display="none"
+    document.querySelector("#video1").style.display="none"
+    document.querySelector("#video4").style.display="block"
+    })
+    
+    
+    </script>

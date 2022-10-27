@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .main{
+        padding:5%;
+        display: grid;
+        grid-column: auto;
+        font-family: arial;
+        color:rgba(0, 0, 0, 0.693);
+    }
+   #mwin{
+        width: 20%;
+      
+        margin: auto;
+    }
+    #winner{
+        padding:5vh;
+        border: 1px solid gainsboro;
+        text-align: center;
+        font-weight: 600;
+        color: black;
+
+    }
+    .submain{
+        width: 60%;
+        padding:5%;
+        display: flex;
+        justify-content: space-evenly;
+        margin: auto;
+    }
+    .submain > div{
+        width: 30%;
+       
+
+    }
+    #member-1,#member-2,#member-3{
+        border: 1px solid gainsboro;
+        padding:5vh;
+        text-align: center;
+    }
+    #roll{
+     
+        padding:2vh;
+        margin: auto;
+    }
+    h4{
+        text-align: center;
+        margin-bottom: 2px;
+        font-weight: 600;
+        font-size: 2vh;
+    }
+</style>
+
+<body>
+    
+
+    <div class="main">
+
+     <div id="mwin"> <h4>Winner</h4>  <div id="winner"></div> </div>  
+
+        <div class="submain">
+            <div> <h4> Member A</h4> <div id="member-1"></div> </div>
+            <div> <h4> Member B</h4> <div id="member-2"></div> </div>
+            <div> <h4> Member C</h4> <div id="member-3"></div> </div>
+        </div>
+
+        <button id="roll">ROLL THE DICE</button>
+
+    </div>
+</body>
+</html>
+
+
+<script>
+
+    document.querySelector("#roll").addEventListener("click",function(){
+     
+   var dice1= document.querySelector("#member-1").textContent=Math.ceil(Math.random() * 6)
+   var dice2= document.querySelector("#member-2").textContent=Math.ceil(Math.random() * 6)
+   var dice3= document.querySelector("#member-3").textContent=Math.ceil(Math.random() * 6)
+
+   if(dice1>dice2 && dice1> dice3){
+    document.querySelector("#winner").textContent="Member A"
+   }else if(dice2>dice1 && dice2> dice3){
+    document.querySelector("#winner").textContent="Member B"
+   }else if(dice3>dice1 && dice3> dice2){
+    document.querySelector("#winner").textContent="Member C"
+
+   }
+
+if(dice1>dice2 && dice1>dice3 && dice2>dice3){
+    document.querySelector("#member-1").style.color="green"
+    document.querySelector("#member-2").style.color="yellow"
+    document.querySelector("#member-3").style.color="red"
+
+    document.querySelector("#member-1").style.borderColor="green"
+    document.querySelector("#member-2").style.borderColor="yellow"
+    document.querySelector("#member-3").style.borderColor="red"
+}else if(dice1>dice2 && dice1>dice3 && dice2<dice3){
+    document.querySelector("#member-1").style.color="green"
+    document.querySelector("#member-2").style.color="red"
+    document.querySelector("#member-3").style.color="yellow"
+
+    document.querySelector("#member-1").style.borderColor="green"
+    document.querySelector("#member-2").style.borderColor="red"
+    document.querySelector("#member-3").style.borderColor="yellow"
+}
+else if(dice2>dice1 && dice2>dice3 && dice1>dice3){
+    document.querySelector("#member-2").style.color="green"
+    document.querySelector("#member-3").style.color="red"
+    document.querySelector("#member-1").style.color="yellow"
+
+    document.querySelector("#member-2").style.borderColor="green"
+    document.querySelector("#member-3").style.borderColor="red"
+    document.querySelector("#member-1").style.borderColor="yellow"
+}else if(dice2>dice1 && dice2<dice3 && dice1>dice3){
+    document.querySelector("#member-2").style.color="green"
+    document.querySelector("#member-3").style.color="yellow"
+    document.querySelector("#member-1").style.color="red"
+
+    document.querySelector("#member-2").style.borderColor="green"
+    document.querySelector("#member-3").style.borderColor="yellow"
+    document.querySelector("#member-1").style.borderColor="red"
+}
+else if(dice3>dice1 && dice3>dice2  && dice1>dice2){
+    document.querySelector("#member-3").style.color="green"
+    document.querySelector("#member-1").style.color="yellow"
+    document.querySelector("#member-2").style.color="red"
+
+    document.querySelector("#member-3").style.borderColor="green"
+    document.querySelector("#member-1").style.borderColor="yellow"
+    document.querySelector("#member-2").style.borderColor="red"
+}else if(dice3>dice1 && dice3>dice2  && dice1<dice2){
+    document.querySelector("#member-3").style.color="green"
+    document.querySelector("#member-1").style.color="red"
+    document.querySelector("#member-2").style.color="yellow"
+
+    document.querySelector("#member-3").style.borderColor="green"
+    document.querySelector("#member-1").style.borderColor="red"
+    document.querySelector("#member-2").style.borderColor="yellow"
+}
+
+
+if(dice1==dice2 && dice1> dice3){
+    document.querySelector("#member-1").style.color="blue"
+    document.querySelector("#member-2").style.color="blue"
+    document.querySelector("#member-3").style.color="yellow"
+
+    document.querySelector("#member-1").style.borderColor="blue"
+    document.querySelector("#member-2").style.borderColor="blue"
+    document.querySelector("#member-3").style.borderColor="yellow"
+} else if(dice1==dice2 && dice1< dice3){
+    document.querySelector("#member-1").style.color="blue"
+    document.querySelector("#member-2").style.color="blue"
+    document.querySelector("#member-3").style.color="green"
+
+    document.querySelector("#member-1").style.borderColor="blue"
+    document.querySelector("#member-2").style.borderColor="blue"
+    document.querySelector("#member-3").style.borderColor="green"
+}else if(dice2==dice3 && dice2 > dice1){
+    document.querySelector("#member-1").style.color="yellow"
+    document.querySelector("#member-2").style.color="blue"
+    document.querySelector("#member-3").style.color="blue"
+
+    document.querySelector("#member-1").style.borderColor="yellow"
+    document.querySelector("#member-2").style.borderColor="blue"
+    document.querySelector("#member-3").style.borderColor="blue"
+}else if(dice2==dice3 && dice2 < dice1){
+    document.querySelector("#member-1").style.color="green"
+    document.querySelector("#member-2").style.color="blue"
+    document.querySelector("#member-3").style.color="blue"
+
+    document.querySelector("#member-1").style.borderColor="green"
+    document.querySelector("#member-2").style.borderColor="blue"
+    document.querySelector("#member-3").style.borderColor="blue"
+}else if(dice1==dice3 && dice1 > dice2){
+    document.querySelector("#member-1").style.color="blue"
+    document.querySelector("#member-2").style.color="yellow"
+    document.querySelector("#member-3").style.color="blue"
+
+    document.querySelector("#member-1").style.borderColor="blue"
+    document.querySelector("#member-2").style.borderColor="yellow"
+    document.querySelector("#member-3").style.borderColor="blue"
+}else if(dice1==dice3 && dice1 < dice2){
+    document.querySelector("#member-1").style.color="blue"
+    document.querySelector("#member-2").style.color="green"
+    document.querySelector("#member-3").style.color="blue"
+
+    document.querySelector("#member-1").style.borderColor="blue"
+    document.querySelector("#member-2").style.borderColor="green"
+    document.querySelector("#member-3").style.borderColor="blue"
+}
+else if(dice1==dice2 && dice1==dice3 && dice2==dice3){
+    document.querySelector("#member-1").style.color="blue"
+    document.querySelector("#member-2").style.color="blue"
+    document.querySelector("#member-3").style.color="blue"
+
+    document.querySelector("#member-1").style.borderColor="blue"
+    document.querySelector("#member-2").style.borderColor="blue"
+    document.querySelector("#member-3").style.borderColor="blue"
+}
+})
+</script>

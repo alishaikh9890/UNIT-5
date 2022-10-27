@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch example 2</title>
+</head>
+
+<style>
+#box{
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2%;
+}
+#box img{
+    width: 200px;
+    height: 250px;
+    border: 1px solid gainsboro;
+    margin: auto;
+}
+#box > div{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+ justify-content: space-between ;
+ padding: 2vh;
+ 
+}
+</style>
+<body>
+    
+<div id="box"></div>
+
+</body>
+</html>
+
+<script>
+
+    let box = document.getElementById("box");
+
+    async function fetchAndDisplayData(){
+        try{
+            let url = `https://fakestoreapi.com/products`
+            
+            let res = await fetch(url)
+            let products = await res.json()
+
+            displayProducts(products)
+        } catch(error){
+            console.log(error)
+        }
+        
+    }
+
+
+   
+
+
+function displayProducts(data){
+
+    data.forEach(element => {
+        
+        var box1 = document.createElement("div");
+
+        var img= document.createElement("img")
+        img.src=element.image;
+
+        var ht = document.createElement("h3");
+        ht.textContent=element.title;
+
+        var hp = document.createElement("h3");
+        hp.textContent="Price : "+element.price+" $ ";
+
+        let p = document.createElement("p");
+        p.textContent=element.description;
+
+        let hr = document.createElement("h3");
+        hr.textContent=element.rating
+
+        box1.append(img, ht, hp, p)
+        box.append(box1)
+
+    });
+
+}
+
+fetchAndDisplayData()
+
+
+
+
+</script>
+
+
+
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>edit</title>
+</head>
+<body>
+   <div id="form">
+      <input type="text" id="name" placeholder="Name" />
+       <br/>
+      <input type="number" id="age" placeholder="Enter age" />
+      <br/>
+      <input type="text" id="gender" placeholder="gender" />
+      <br/>
+      <input type="text" id="cohort" placeholder="cohort" />
+      <br/>
+      <button onclick= "editStudent()" >EDIT STUDENT</button>
+   </div>
+   
+</body>
+</html>
+
+<script>
+    //retrive the student from the local storage;
+
+    const studentId = localStorage.getItem("studentId") 
+    ? localStorage.getItem("studentId") 
+    : "";
+
+        // make the network request to the server; get the perticular student details;
+
+        const updateInputBoxes = async () => {
+         try {
+            let res = await fetch(`http://localhost:3000/students/${studentId}`)
+
+         let data = await res.json()
+
+            const { id, name, age, gender, cohort } = data;
+
+            document.getElementById("name").value = name;
+            document.getElementById("age").value = age;
+            document.getElementById("gender").value = gender;
+            document.getElementById("cohort").value = cohort;
+       
+            
+         } catch (error) {
+            console.log(error)
+         }
+         
+        }
+      
+      updateInputBoxes()
+
+
+
+      async function editStudent(){
+         try {
+
+            const body ={
+               name:document.getElementById("name").value,
+               age:document.getElementById("age").value,
+               gender:document.getElementById("gender").value,
+               cohort:document.getElementById("cohort").value
+            }
+
+            let res = await fetch(`http://localhost:3000/students/${studentId}`, {
+               method:"PUT",
+               body:JSON.stringify(body),
+               headers:{
+               "Content-Type":"application/json"
+               }
+            });
+
+            location.href="index.html"
+         } catch (error) {
+            console.log(error)
+         }
+      }
+        // pre-fill up forms with those student details;
+</script>

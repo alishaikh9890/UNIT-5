@@ -60,6 +60,41 @@ button{
     border: none;
 }
 
+#main{
+    width:60%;
+    margin:auto;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: auto auto auto;
+    grid-gap: 3%;
+    padding:7%;
+    font-family: arial;
+    font-weight: 500;
+}
+#submain{
+    border:1px solid gainsboro;
+}
+#submain p{
+    text-align: center;
+}
+#submain h3 {
+    padding: 0px 2vh;
+}
+#sort{
+    width:30vh;
+    display: flex;
+    justify-content: space-between;
+   
+    
+}
+#sort > div{
+    border:1px solid black;
+    padding:1vh 2vh;
+    font-family: arial;
+    font-weight: 600;
+    background-color: gainsboro;
+}
+
 </style>
 <body>
     <div id="nav">
@@ -78,8 +113,19 @@ button{
         <img id="img4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVgZpAJzI77uIV4J-s1rY8Ti3MrHh3R99wSj4GaaCtizBcNVmoEDZiLy6_krJmhkEAgK8&usqp=CAU" />
 
     </div>
+    
     <button>></button>
  </div>
+<div id="sort">
+  <div id="sort1">sort-lh</div>
+  <div id="sort2" >sort-hl</div>
+</div>
+
+<div id="main">
+
+</div>
+
+
 </body>
 </html>
 
@@ -109,3 +155,129 @@ setInterval(change,1000)
 
     
 </script> 
+
+
+
+<script>
+    var moviesData=[
+        {
+            name:"The Batman",
+            date:"15 Apr 2022",
+            post:"https://imgs.search.brave.com/QGw7u58hs-HTpdKqu6jHyf-D9iBjo35h2TFvNwKRQjc/rs:fit:320:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC50/aFl4WWhVcmpYVlRl/YUNBMnAxMUNRSGFL/LSZwaWQ9QXBp",
+            rating:8.1
+
+        },
+        {
+            name:"Outer Range",
+            date:"15 Apr 2022",
+            post:"https://imgs.search.brave.com/kYA7db8-dbOriMOcf46mjrd6TRs3TsWzYtwMT9snfdo/rs:fit:300:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JRi5v/YVpHYlBQdDZNUlQ1/SGclMmI1cnJWS2cm/cGlkPUFwaQ",
+            rating:7.8
+
+        },
+        {
+            name:"K.G.F: Chapter 2",
+            date:"14 Apr 2022",
+            post:"https://imgs.search.brave.com/RS2M7mJ1KJMGblBwjRbxkMUVTUmOlAANgjciyDySg4E/rs:fit:314:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC41/cVBteXFvdHdzQVVx/X0x0UnJsMXRBSGFM/SyZwaWQ9QXBp",
+            rating:9.1
+
+        },
+        {
+            name:"Sonic 2",
+            date:"6 Apr 2022",
+            post:"https://imgs.search.brave.com/MdQv230lLc_9YZMUwM-pLjt0SJ-d514tExbMfd4H0PM/rs:fit:317:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5T/RF9NcTVkTXlPWmlm/WF82UXNyVlZRSGFM/RSZwaWQ9QXBp",
+            rating:6.9
+
+        },
+        {
+            name:"Dune",
+            date:"22 oct 2021",
+            post:"https://imgs.search.brave.com/cG_k1ZEScVO6cy0qBKhKmdqN0FoXSOwLwqF13ccpDHc/rs:fit:316:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5h/VVk3NElZVkUxa2RI/am1PSkNkOFBBSGFM/SCZwaWQ9QXBp",
+            rating:8.1
+        },
+        {
+            name:"RRR",
+            date:"5 March 2022",
+            post:"https://imgs.search.brave.com/H7KZU4pdG5kHQHXCd5q4pusqrs2F2Q_6hRaPDCTIDo8/rs:fit:160:225:1/g:ce/aHR0cHM6Ly90c2Ux/LmV4cGxpY2l0LmJp/bmcubmV0L3RoP2lk/PU9JUC4zc3BhMUxq/LVA2Y0FjbFVRQXpS/VWdRQUFBQSZwaWQ9/QXBp",
+            rating:8.4
+        },
+        {
+            name:"Joker",
+            date:"4 oct 2021",
+            post:"https://imgs.search.brave.com/N_6QCURUXgQdJwMb-WkDrYfSorD-pRReJatIRQgZwZk/rs:fit:320:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5z/dDZXdlpxUllYR0w4/ck4zYUU1VnJ3SGFL/OSZwaWQ9QXBp",
+            rating:8.4
+        },
+        {
+            name:"Flash",
+            date:"19 jan 2022",
+            post:"https://imgs.search.brave.com/ads7TS1XK-krigvKTIbARVpdKEPGXHWtAZPdK-Bs9eQ/rs:fit:316:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5m/a29fSll6ZGdIdFVM/S2NPckhXN0RRSGFM/SCZwaWQ9QXBp",
+            rating:7.6
+        },
+        {
+            name:"CODA",
+            date:"22 oct 2021",
+            post:"https://imgs.search.brave.com/yR44lF9-MjsDqKp3vQEwXJftDcLFmf6ZF0OKWGgDivY/rs:fit:316:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5p/N2xFWkRablczdTls/VFVJMUtvVV9BSGFM/SCZwaWQ9QXBp",
+            rating:8
+        },
+    ]
+
+ localStorage.setItem("moviesData",JSON.stringify(moviesData))
+</script>
+
+
+
+<script>
+    var moviesData=JSON.parse(localStorage.getItem("moviesData"));
+  
+document.querySelector("#sort1").addEventListener("click",function(){
+var sort=document.querySelector("#sort1").value;
+moviesData.sort(function(a, b){
+
+        return a.rating - b.rating;
+   
+})
+displayData(moviesData)
+})
+
+document.querySelector("#sort2").addEventListener("click",function(){
+var sort=document.querySelector("#sort2").value;
+moviesData.sort(function(a, b){
+
+        return b.rating - a.rating;
+   
+})
+displayData(moviesData)
+})
+
+
+
+
+
+    function displayData(){
+
+        document.querySelector("#main").innerHTML="";
+
+        moviesData.forEach(function(ele){
+    
+   var submain= document.createElement("div");
+   submain.setAttribute("id","submain")
+
+   var img= document.createElement("img")
+   img.src=ele.post;
+
+   var rating=document.createElement("h3");
+   rating.textContent="⭐" + " " +ele.rating;
+
+   var name =document.createElement("h3");
+   name.textContent=ele.name;
+
+   var date= document.createElement("p");
+   date.textContent=ele.date;
+
+     submain.append(img, rating, name, date)
+    document.querySelector("#main").append(submain)
+})
+    }
+
+
+displayData()
+</script>

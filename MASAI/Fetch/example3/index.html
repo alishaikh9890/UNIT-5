@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+</head>
+<body>
+    <input type="text" id="city" />
+    <button onclick="getWeatherData()">GET WEATHER DETAILS</button>
+    <div id="searchResultContainer"></div>
+</body>
+</html>
+
+<script>
+    let searchResultContainer = document.getElementById("searchResultContainer")
+    let API_KEY="484672fe7937c6222bdb3fb59067bbc4"
+ 
+
+    async function getWeatherData(){
+        try{
+
+            let city = document.getElementById("city").value
+           
+
+            let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
+
+             let data = await res.json()
+
+            displayData(data)
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+function displayData(data){
+
+    searchResultContainer.innerHTML=""
+        
+        let weatherCard= document.createElement("div")
+
+        let cityName = document.createElement("p")
+        cityName.textContent=`Name : ${data.name}`;
+
+        let temperature = document.createElement("p")
+        temperature.textContent=`Temp : ${data.main.temp}`
+
+        let humidity = document.createElement("p")
+        humidity.textContent=`Humidity : ${data.main.humidity}`
+
+        let map = document.createElement("iframe")
+        map.src=`https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`
+
+        weatherCard.append(cityName,temperature,humidity,map)
+
+        searchResultContainer.append(weatherCard)
+   
+}
+ 
+
+</script>

@@ -1,0 +1,74 @@
+{
+  "students": [
+    {
+      "name": "Therese",
+      "age": "25",
+      "gender": "others",
+      "cohort": "PT1",
+      "id": 1
+    },
+    {
+      "name": "Ifran",
+      "age": "28",
+      "gender": "Male",
+      "cohort": "Salesforce",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "Julie",
+      "age": 19,
+      "gender": "others",
+      "cohort": "PT3"
+    },
+    {
+      "id": 4,
+      "name": "Honor",
+      "age": 23,
+      "gender": "male",
+      "cohort": "PT3"
+    },
+    {
+      "id": 5,
+      "name": "Cletis",
+      "age": 19,
+      "gender": "female",
+      "cohort": "PT2"
+    },
+    {
+      "id": 6,
+      "name": "Kin",
+      "age": 25,
+      "gender": "others",
+      "cohort": "PT3"
+    },
+    {
+      "id": 7,
+      "name": "Roman",
+      "age": 24,
+      "gender": "male",
+      "cohort": "PT1"
+    },
+    {
+      "id": 8,
+      "name": "Ki",
+      "age": 19,
+      "gender": "others",
+      "cohort": "PT3"
+    },
+    {
+      "id": 9,
+      "name": "Cletus",
+      "age": 22,
+      "gender": "others",
+      "cohort": "PT1"
+    },
+    {
+      "name": "Alishan ",
+      "age": 22,
+      "gender": "Male",
+      "cohort": "PTWEB 2",
+      "id": 10
+    }
+  ]
+}

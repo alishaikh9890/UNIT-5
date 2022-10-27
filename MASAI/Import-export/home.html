@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+
+<style>
+    #container{
+
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+       
+    }
+    #navbar{
+    
+
+    }
+    #nav{
+        margin: 0;
+        padding: 2vh;
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid gray;
+    }
+    #nav > div:nth-child(1){
+        display: flex;
+        justify-content: space-between;
+        
+    }
+    #nav > div:nth-last-child(1){
+        display: flex;
+        justify-content: space-between;
+    }
+    a{
+        padding:2vh 4vh;
+    }
+</style>
+
+<body>
+    <div id="container">
+        <div id="navbar">
+           
+        </div>
+
+        <div id="main"></div>
+    </div>
+    
+</body>
+</html>
+
+<script type="module">
+    import nav from "./components/navbar.js"
+
+    document.querySelector("#navbar").innerHTML=nav()
+</script>

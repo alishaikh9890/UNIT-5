@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FETCH</title>
+</head>
+
+<style>
+#container{
+   
+    display: grid;
+    grid-gap: 5%;
+    grid-template-columns: auto auto auto;
+    margin: auto;
+    width: 80%;
+   border: 1px solid black;
+    background-color: aquamarine;
+    padding: 5%;
+   
+}
+#container img{
+    width: 320px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+#container > div{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    align-items: center;
+    background-color: gainsboro;
+    padding: 1vh;
+    margin: auto;
+}
+
+</style> 
+
+<body>
+
+
+    <div id="container"></div>
+
+
+</body>
+</html>
+
+<script>
+
+ let container = document.getElementById("container");
+ 
+ function fetchAndDisplayData(){
+let url =`https://reqres.in/api/users?page=2`
+
+fetch(url)
+.then(function(res){
+
+    console.log(res)
+
+    return res.json()
+
+})
+.then(function(res){
+
+    let user = res.data
+    displaydata(user)
+
+})
+.catch(function(err){
+
+    console.log(err)
+
+})
+
+}
+function displaydata(data){
+    console.log(data)
+
+data.forEach(element => {
+    
+    let card = document.createElement("div");
+
+    let id = document.createElement("img");
+    id.src=element.avatar;
+
+    let name = document.createElement("p");
+    name.textContent="Name :" + element.first_name + " " + element.last_name;
+
+    let email = document.createElement("p")
+    email.textContent="Email :" + element.email;
+
+    card.append(id, name, email)
+
+    container.append(card)
+});
+
+
+}
+fetchAndDisplayData()
+</script>
+
+
+
+
+<!-- <script src="fetch.js"></script> -->

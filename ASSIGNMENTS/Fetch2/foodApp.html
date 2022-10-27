@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOOD APP</title>
+</head>
+
+<style>
+
+</style>
+<body>
+    <div id="containen">
+        <div id="box">
+
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
+
+<script>
+
+    let box = document.getElementById("box");
+
+   async function foodApp(){
+try{
+  
+
+let res = await fetch(`www.themealdb.com/api/v1/1/search.php?`)
+
+let products = await res.json();
+
+showFood(products)
+}
+catch(error){
+    console.log(error)
+}
+    
+    }
+    
+
+
+    function showFood(produts){
+
+        products.forEach(element => {
+            
+            let box1 = document.createElement("div");
+
+            let box2 = document.createElement("div");
+
+            let img =document.createElement("img");
+             img.src=element.strMealThumb
+
+             let h2= document.createElement("h2")
+             h2.textContent=element.strMeal
+
+             box2.append(img)
+             box1.append(box2,h2)
+             box.append(box1)
+
+        });
+    }
+
+
+    foodApp()
+</script>

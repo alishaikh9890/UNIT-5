@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family:arial;
+    }
+    #nav{
+  
+        display: flex;
+        flex-direction: row-reverse;
+        border: 1px solid black;
+        padding: 2vh;
+        background-color: rgba(135, 207, 235, 0.508);
+    }
+    #nav > div{
+     
+        padding: 1vh;
+        margin-right: 4vh;
+       
+    }
+    #nav > div:hover{
+        background-color: skyblue;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    table{
+        margin: auto;
+        border-collapse: collapse;
+    }
+
+    thead{
+        background-color: gray;
+        font-weight: bold;
+        border: 1px solid black;
+    }
+    th{
+        border: 1px solid black;
+    }
+  
+    tr{
+        border: 1px solid black;
+    }
+    td{
+        padding: 1vh;
+        border: 1px solid black;
+    }
+    #main{
+        margin-top: 3vh;
+        display: flex;
+        flex-direction: row-reverse;
+        padding-right: 10vh;
+    }
+    select{
+        padding: 2vh;
+    }
+</style>
+<body>
+    <div id="nav">
+      
+       
+        <div><a href="Search Page.html" >Search</a></div>
+        <div><a href="Individual Brewery Page.html">Individual</a></div>
+        <div><a href="Home Page.html">Home</a></div>
+    </div>
+
+    <div>
+        <div id="main">
+            <select id="select">
+                <option>Filter List</option>
+                <option>micro</option>
+                <option>planning</option>
+                <option>brewpub</option>
+            </select>
+        </div>
+     <table>
+
+     </table>
+    </div>
+</body>
+</html>
+
+
+<script>
+
+    fetch(`https://api.openbrewerydb.org/breweries`).then(function(result){
+        result.json().then(function(result1){
+
+console.log(result1)
+
+document.querySelector("table").innerHTML=`
+    
+    <thead>
+            
+                 <td>Name</td>
+                 <td>Brewery Type</td>
+                 <td>City</td>
+                 <td>State</td>
+              
+           
+         </thead>
+
+         <tbody>
+          
+         </tbody>
+    
+    
+    `
+
+
+document.querySelector("#select").addEventListener("change",function(){
+    var select=document.querySelector("#select").value;
+    if(select!="Filter List") {
+        
+            var data= result1.filter(function(ele){
+                return ele.brewery_type==select
+            })
+           
+            displayData(data)
+        
+    }else {
+        window.location.reload()
+    }
+  
+
+
+
+
+
+
+})
+
+function displayData(result1){
+    document.querySelector("tbody").innerHTML=""
+
+
+result1.forEach(element => {
+    
+    
+    var tr= document.createElement("tr")
+
+var td1=document.createElement("td");
+td1.textContent=element.name
+var td2=document.createElement("td");
+td2.textContent=element.brewery_type
+var td3=document.createElement("td");
+td3.textContent=element.city
+var td4=document.createElement("td");
+td4.textContent=element.state
+
+var td5= document.createElement("td");
+
+var button=document.createElement("button");
+button.textContent="MORE DETAILS"
+button.addEventListener("click",function cart(){
+    localStorage.setItem("id",element.id)
+    // arr.push(element.id)
+    // console.log(arr)
+    window.location="Individual Brewery Page.html"
+})
+
+ td5.append(button)
+tr.append(td1,td2,td3,td4,td5)
+
+document.querySelector("tbody").append(tr)
+
+
+
+
+});
+
+}
+displayData(result1)
+
+        })
+    })
+
+
+
+
+  
+
+
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor Function</title>
+</head>
+<body> </body>
+</html>
+<script>
+    console.log("CONSTRUCTOR FUNCTIONS");
+
+    function Person1(n,a){
+        this.name =n;
+        this.age = a;
+         
+        // adding method to object directly;
+        this.printName = function(){
+            console.log(this.name);
+        };
+    }
+
+    // adding method to object's prototype
+    Person1.prototype.getDetails= function(){
+        console.log(`${this.name} is ${this.age} years old`);
+    };
+    
+    let p1 = new Person1("Bruce",26);
+
+    console.log("p1",p1);
+
+    // inheritance
+    function Student1(name, age, roll_no,school){
+        // Person1.call(this, name, age);  this allows Student1
+        // constructor to inherit properties of it's parent
+        // constructor which is Person1
+        this.roll_no = roll_no;
+        this.school = school;
+    }
+
+    let s1 = new Student1("Oliver", 35, 12321, "ST.Matthews");
+
+    console.log()
+</script>
